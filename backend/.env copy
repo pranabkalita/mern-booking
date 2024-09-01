@@ -1,0 +1,1 @@
+MONGO_DB_CONNECTION_STRING=mongodb+srv://pranab:<db_password>@cluster0.bdkrdze.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
