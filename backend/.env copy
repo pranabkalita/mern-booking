@@ -1,1 +1,2 @@
 MONGO_DB_CONNECTION_STRING=mongodb+srv://pranab:<db_password>@cluster0.bdkrdze.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET_KEY=THIS_IS_VERY_SECURE_KEY
