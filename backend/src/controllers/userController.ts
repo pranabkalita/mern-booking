@@ -21,7 +21,7 @@ export const register = async (req: Request, res: Response) => {
 
     if (user) {
       return res.status(400).json({
-        message: "user already exists.",
+        message: "User already exists.",
       });
     }
 
@@ -42,9 +42,10 @@ export const register = async (req: Request, res: Response) => {
       maxAge: 86400000,
     });
 
-    return res.sendStatus(200);
+    return res.status(200).send({
+      message: "User Registered.",
+    });
   } catch (error) {
-    console.log(error);
     res.status(500).send({
       message: "Something went wrong.",
     });
