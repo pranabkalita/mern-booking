@@ -83,7 +83,7 @@ const SignIn = () => {
           type="submit"
           className="bg-blue-600 font-bold text-white p-2 hover:bg-blue-500 text-xl"
         >
-          Sing In
+          Login
         </button>
       </span>
     </form>
