@@ -1,5 +1,9 @@
 import { FormProvider, useForm } from "react-hook-form";
 import DetailsSection from "./DetailsSection";
+import TypeSection from "./TypeSection";
+import FacilitiesSection from "./FacilitiesSection";
+import GuestsSection from "./GuestsSection";
+import ImagesSection from "./ImagesSection";
 
 export type HotelFormData = {
   name: string;
@@ -15,13 +19,57 @@ export type HotelFormData = {
   childCount: number;
 };
 
-const ManageHotelForm = () => {
+type Props = {
+  onSave: (hotelFormData: FormData) => void;
+  isLoading: boolean;
+};
+
+const ManageHotelForm = ({ onSave, isLoading }: Props) => {
   const formMethods = useForm<HotelFormData>();
+  const { handleSubmit } = formMethods;
+
+  const onSubmit = handleSubmit((form: HotelFormData) => {
+    // Create new FormData
+    const formData = new FormData();
+    formData.append("name", form.name);
+    formData.append("city", form.city);
+    formData.append("country", form.country);
+    formData.append("description", form.description);
+    formData.append("type", form.type);
+    formData.append("pricePerNight", form.pricePerNight.toString());
+    formData.append("starRating", form.starRating.toString());
+    formData.append("adultCount", form.adultCount.toString());
+    formData.append("childCount", form.childCount.toString());
+
+    form.facilities.forEach((facility, index) => {
+      formData.append(`facilities[${index}]`, facility);
+    });
+
+    Array.from(form.imageFiles).forEach((image) => {
+      formData.append(`imageFiles`, image);
+    });
+
+    onSave(formData);
+  });
 
   return (
     <FormProvider {...formMethods}>
-      <form>
+      <form className="space-y-10" onSubmit={onSubmit}>
         <DetailsSection />
+        <TypeSection />
+        <FacilitiesSection />
+        <GuestsSection />
+        <ImagesSection />
+
+        <span className="flex justify-end">
+          <button
+            disabled={isLoading}
+            type="submit"
+            className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl disabled:bg-gray-500"
+          >
+            {isLoading ? "Saving..." : "Save"}
+          </button>
+        </span>
       </form>
     </FormProvider>
   );

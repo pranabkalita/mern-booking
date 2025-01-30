@@ -13,7 +13,7 @@ export const create = async (req: Request, res: Response) => {
   }
 
   try {
-    const imageFiles = req.files as Express.Multer.File[];
+    const imageFiles: Express.Multer.File[] = req.files as Express.Multer.File[];
     const newHotel: HotelType = req.body;
 
     // 1. Upload the images to cloudinary

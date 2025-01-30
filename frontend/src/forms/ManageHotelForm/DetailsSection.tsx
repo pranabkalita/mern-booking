@@ -20,9 +20,7 @@ const DetailsSection = () => {
             autoComplete="false"
             {...register("name", { required: "This field is required." })}
           />
-          {errors.name && (
-            <span className="text-red-500">{errors.name.message}</span>
-          )}
+          {errors.name && <span className="text-red-500">{errors.name.message}</span>}
         </label>
       </div>
 
@@ -35,9 +33,7 @@ const DetailsSection = () => {
             autoComplete="false"
             {...register("city", { required: "This field is required." })}
           />
-          {errors.city && (
-            <span className="text-red-500">{errors.city.message}</span>
-          )}
+          {errors.city && <span className="text-red-500">{errors.city.message}</span>}
         </label>
 
         <label className="text-gray-700 text-sm font-bold flex-1">
@@ -48,9 +44,7 @@ const DetailsSection = () => {
             autoComplete="false"
             {...register("country", { required: "This field is required." })}
           />
-          {errors.country && (
-            <span className="text-red-500">{errors.country.message}</span>
-          )}
+          {errors.country && <span className="text-red-500">{errors.country.message}</span>}
         </label>
       </div>
 
@@ -65,9 +59,7 @@ const DetailsSection = () => {
               required: "This field is required.",
             })}
           ></textarea>
-          {errors.description && (
-            <span className="text-red-500">{errors.description.message}</span>
-          )}
+          {errors.description && <span className="text-red-500">{errors.description.message}</span>}
         </label>
       </div>
 
@@ -83,9 +75,7 @@ const DetailsSection = () => {
               required: "This field is required.",
             })}
           />
-          {errors.pricePerNight && (
-            <span className="text-red-500">{errors.pricePerNight.message}</span>
-          )}
+          {errors.pricePerNight && <span className="text-red-500">{errors.pricePerNight.message}</span>}
         </label>
       </div>
 
@@ -100,12 +90,12 @@ const DetailsSection = () => {
               Select a Rating
             </option>
             {[1, 2, 3, 4, 5].map((number) => (
-              <option value={number}>{number}</option>
+              <option value={number} key={number}>
+                {number}
+              </option>
             ))}
           </select>
-          {errors.starRating && (
-            <span className="text-red-500">{errors.starRating.message}</span>
-          )}
+          {errors.starRating && <span className="text-red-500">{errors.starRating.message}</span>}
         </label>
       </div>
     </div>
