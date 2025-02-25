@@ -6,7 +6,7 @@ import * as apiClient from "../api-client";
 const AddHotel = () => {
   const { showToast } = useAppContext();
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: apiClient.addMyHotel,
     onSuccess: () => {
       showToast({ message: "Hotel added successfully.", type: "SUCCESS" });
@@ -20,7 +20,7 @@ const AddHotel = () => {
     mutate(hotelFormData);
   };
 
-  return <ManageHotelForm onSave={handleSave} isLoading={isLoading} />;
+  return <ManageHotelForm onSave={handleSave} isLoading={isPending} />;
 };
 
 export default AddHotel;
