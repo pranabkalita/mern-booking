@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 
 import * as apiClient from "./../api-client";
@@ -27,7 +27,8 @@ const Register = () => {
     formState: { errors },
   } = useForm<RegisterFormData>();
 
-  const mutation = useMutation(apiClient.register, {
+  const mutation = useMutation({
+    mutationFn: apiClient.register,
     onSuccess: async () => {
       showToast({ message: "Registration Success!", type: "SUCCESS" });
       await queryClient.invalidateQueries({ queryKey: ["validateToken"] });
@@ -55,9 +56,7 @@ const Register = () => {
             autoComplete="false"
             {...register("firstName", { required: "This field is required." })}
           />
-          {errors.firstName && (
-            <span className="text-red-500">{errors.firstName?.message}</span>
-          )}
+          {errors.firstName && <span className="text-red-500">{errors.firstName?.message}</span>}
         </label>
 
         <label className="text-gray-700 text-sm font-bold flex-1">
@@ -68,9 +67,7 @@ const Register = () => {
             autoComplete="false"
             {...register("lastName", { required: "This field is required." })}
           />
-          {errors.lastName && (
-            <span className="text-red-500">{errors.lastName.message}</span>
-          )}
+          {errors.lastName && <span className="text-red-500">{errors.lastName.message}</span>}
         </label>
       </div>
 
@@ -83,9 +80,7 @@ const Register = () => {
             autoComplete="false"
             {...register("email", { required: "This field is required." })}
           />
-          {errors.email && (
-            <span className="text-red-500">{errors.email.message}</span>
-          )}
+          {errors.email && <span className="text-red-500">{errors.email.message}</span>}
         </label>
       </div>
 
@@ -106,9 +101,7 @@ const Register = () => {
               },
             })}
           />
-          {errors.password && (
-            <span className="text-red-500">{errors.password.message}</span>
-          )}
+          {errors.password && <span className="text-red-500">{errors.password.message}</span>}
         </label>
       </div>
 
@@ -123,11 +116,7 @@ const Register = () => {
               required: "This field is required.",
             })}
           />
-          {errors.confirmPassword && (
-            <span className="text-red-500">
-              {errors.confirmPassword.message}
-            </span>
-          )}
+          {errors.confirmPassword && <span className="text-red-500">{errors.confirmPassword.message}</span>}
         </label>
       </div>
 
@@ -139,10 +128,7 @@ const Register = () => {
           </Link>
         </span>
 
-        <button
-          type="submit"
-          className="bg-blue-600 font-bold text-white p-2 hover:bg-blue-500 text-xl"
-        >
+        <button type="submit" className="bg-blue-600 font-bold text-white p-2 hover:bg-blue-500 text-xl">
           Create Account
         </button>
       </span>

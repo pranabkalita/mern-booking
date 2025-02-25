@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
 
 import * as apiClient from "./../api-client";
@@ -23,7 +23,8 @@ const SignIn = () => {
     formState: { errors },
   } = useForm<SignInFormData>();
 
-  const mutation = useMutation(apiClient.login, {
+  const mutation = useMutation({
+    mutationFn: apiClient.login,
     onSuccess: async () => {
       showToast({ message: "Login Success!", type: "SUCCESS" });
       await queryClient.invalidateQueries({ queryKey: ["validateToken"] });
@@ -51,9 +52,7 @@ const SignIn = () => {
             autoComplete="false"
             {...register("email", { required: "This field is required." })}
           />
-          {errors.email && (
-            <span className="text-red-500">{errors.email.message}</span>
-          )}
+          {errors.email && <span className="text-red-500">{errors.email.message}</span>}
         </label>
       </div>
 
@@ -66,9 +65,7 @@ const SignIn = () => {
             autoComplete="false"
             {...register("password", { required: "This field is required." })}
           />
-          {errors.password && (
-            <span className="text-red-500">{errors.password.message}</span>
-          )}
+          {errors.password && <span className="text-red-500">{errors.password.message}</span>}
         </label>
       </div>
 
@@ -79,10 +76,7 @@ const SignIn = () => {
             Create an account here
           </Link>
         </span>
-        <button
-          type="submit"
-          className="bg-blue-600 font-bold text-white p-2 hover:bg-blue-500 text-xl"
-        >
+        <button type="submit" className="bg-blue-600 font-bold text-white p-2 hover:bg-blue-500 text-xl">
           Login
         </button>
       </span>

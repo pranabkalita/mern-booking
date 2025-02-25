@@ -1,4 +1,4 @@
-import { useMutation } from "react-query";
+import { useMutation } from "@tanstack/react-query";
 import ManageHotelForm from "../forms/ManageHotelForm/ManageHotelForm";
 import { useAppContext } from "../contexts/AppContexts";
 import * as apiClient from "../api-client";
@@ -6,7 +6,8 @@ import * as apiClient from "../api-client";
 const AddHotel = () => {
   const { showToast } = useAppContext();
 
-  const { mutate, isLoading } = useMutation(apiClient.addMyHotel, {
+  const { mutate, isLoading } = useMutation({
+    mutationFn: apiClient.addMyHotel,
     onSuccess: () => {
       showToast({ message: "Hotel added successfully.", type: "SUCCESS" });
     },
