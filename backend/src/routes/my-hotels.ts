@@ -2,7 +2,7 @@ import express from "express";
 import { check } from "express-validator";
 import multer from "multer";
 
-import { create } from "../controllers/hotelController";
+import { index, create } from "../controllers/hotelController";
 import { verifyToken } from "../middleware/auth";
 
 const router = express.Router();
@@ -15,6 +15,8 @@ const upload = multer({
     fileSize: 5 * 1024 * 1024, // 5MB
   },
 });
+
+router.get("/", verifyToken, index);
 
 router.post(
   "/",

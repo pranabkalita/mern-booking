@@ -3,6 +3,19 @@ import { validationResult } from "express-validator";
 import cloudinary from "cloudinary";
 import Hotel, { HotelType } from "../models/hotel";
 
+export const index = async (req: Request, res: Response) => {
+  try {
+    const hotels = await Hotel.find({ userId: req.userId });
+
+    res.json(hotels);
+  } catch (error) {
+    console.log("Error fetching my hotels: ", error);
+    res.status(500).send({
+      message: "Something went wrong.",
+    });
+  }
+};
+
 export const create = async (req: Request, res: Response) => {
   const errors = validationResult(req);
 
