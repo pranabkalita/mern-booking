@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 import cloudinary from "cloudinary";
-import Hotel, { HotelType } from "../models/hotel";
+import Hotel from "../models/hotel";
+import { HotelType } from "../shared/types";
 
 export const index = async (req: Request, res: Response) => {
   try {

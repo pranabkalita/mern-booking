@@ -31,7 +31,7 @@ const MyHotels = () => {
 
       <div className="grid grid-cols-1 gap-8">
         {hotelData.map((hotel) => (
-          <div className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5">
+          <div className="flex flex-col justify-between border border-slate-300 rounded-lg p-8 gap-5 hotel-block">
             <h2 className="text-2xl font-bold">{hotel.name}</h2>
             <div className="whitespace-pre-line">{hotel.description}</div>
             <div className="grid grid-cols-5 gap-2">
@@ -63,7 +63,7 @@ const MyHotels = () => {
             <span className="flex justify-end">
               <Link
                 to={`/edit-hotel/${hotel._id}`}
-                className="bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500"
+                className="bg-blue-600 text-white text-xl font-bold p-2 hover:bg-blue-500 view-details"
               >
                 View Details
               </Link>
